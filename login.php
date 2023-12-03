@@ -1,28 +1,26 @@
-<!-- <?php echo "HoosInAction" ?> -->
+
 <?php
+ob_start();
 require("connect-db.php");
 require("opportunity-db.php");
 require("user-db.php");
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST['loginBtn'])) {
       $id = getUserID($_POST['email']);
-      echo $id[0]['memberID'];
       $password = getPassword($id[0]['memberID']);
-      echo $password[0]['password'];
 
       //just to test 
       if($password[0]['password'] == $_POST['password']){
-        header("Location: main.php&message=Login+successful!");
-        exit;
-
+        header("Location: main.php");
+        exit();
       }
       else{
-        header("Location: index.php?page=/login.php&error=Invalid+Credentials!+Please+try+again+with+correct+Username+and/or+Password.");
+        echo "password and email do not match";
       }
 
     }
   }
+  ob_end_clean();
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class = "login">
     <div class= "container">
         <h1>login.</h1> 
-        <p>Do not have an account? <a class="register-link" href="register.php">Login</a></p>
+        <p>Do not have an account? <a class="register-link" href="register.php">register</a></p>
         <form name="loginform" action="login.php" method="post">>
             <div class="row">
                 <div class = "form-group1">
@@ -102,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="password" class="form-control" id="input-password" name="password" placeholder="Enter password">
             </div>
 
-            <input type="submit" value="Add user" name="loginBtn" class="btn btn-primary"/>
+            <input type="submit" value="Login" name="loginBtn" class="btn btn-primary"/>
         </form>
 
 

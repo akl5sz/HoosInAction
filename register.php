@@ -13,10 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   if (!empty($_POST['addBtn2'])) {
-    addUser($_POST['memberID'], $_POST['password']);
-    addOrganization($_POST['memberID'],$_POST['fname'], $_POST['lname']);
-    addUser_emails($_POST['memberID'],$_POST['email']);
-    addStudent_phone($_POST['memberID'],$_POST['phone']);
+    addUser($_POST['OrgID'], $_POST['password']);
+    addOrganization($_POST['OrgID'],$_POST['OrgName'], $_POST['description']);
+    addUser_emails($_POST['OrgID'],$_POST['email']);
   }
 }
 
@@ -261,13 +260,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-6">
                     <div class = "form-group01">
                         <label for="label-oname"> Organization Name</label>
-                        <input type="text" class="form-control" id="input-oname" name="oname" placeholder="Enter organization name">
+                        <input type="text" class="form-control" id="input-oname" name="OrgName" placeholder="Enter organization name">
                     </div>
                 </div>
                 <div class="col-6">
                     <div class = "form-group02">
                         <label for="label-oidname"> Organization ID</label>
-                        <input type="text" class="form-control" id="input-oidname" name="oidname" placeholder="Enter organization ID">
+                        <input type="text" class="form-control" id="input-oidname" name="OrgID" placeholder="Enter organization ID">
                     </div>
                 </div>
                 <div class = "form-group03">

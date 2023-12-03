@@ -12,14 +12,14 @@ function addUser($memberID,$password){
 
 }
 
-function addOrganization($memberID, $password, $description){
+function addOrganization($memberID, $name, $description){
     global $db; 
 
-    $query = "insert into Organization values (:memberID, :name, :description) ";
+    $query = "insert into Organizations values (:memberID, :name, :description) ";
   
     $statement = $db->prepare($query); 
     $statement->bindValue(':memberID', $memberID);
-    $statement->bindValue(':name', $password);
+    $statement->bindValue(':name', $name);
     $statement->bindValue(':description', $description);
     $statement->execute();
     $statement->closeCursor();
@@ -44,13 +44,13 @@ function addStudent($memberID, $fname, $lname){
 function addUser_emails($memberID, $email){
     global $db; 
 
-    $query = "insert into User_emails values (:studentID, :email) ";
+    $query = "insert into User_emails values (:memberID, :email) ";
     // `studentID` varchar(30) NOT NULL,
     //`First_Name` varchar(50) NOT NULL,
     //`Last_Name` varchar(50) NOT NULL
   
     $statement = $db->prepare($query); 
-    $statement->bindValue(':studentID', $memberID);
+    $statement->bindValue(':memberID', $memberID);
     $statement->bindValue(':email', $email);
     $statement->execute();
     $statement->closeCursor();
@@ -58,9 +58,9 @@ function addUser_emails($memberID, $email){
 
 function addStudent_phone($memberID, $phone){
     global $db;
-    $query = "insert into Student_phones values (:studentID, :phone) ";
+    $query = "insert into Student_phones values (:memberID, :phone) ";
     $statement = $db->prepare($query); 
-    $statement->bindValue(':studentID', $memberID);
+    $statement->bindValue(':memberID', $memberID);
     $statement->bindValue(':phone', $phone);
     $statement->execute();
     $statement->closeCursor();
@@ -87,3 +87,4 @@ function getPassword($memberID){
     $statement->closeCursor();
     return $result;
 }
+

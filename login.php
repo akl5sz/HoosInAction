@@ -6,14 +6,19 @@ require("user-db.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST['loginBtn'])) {
-      $id = getUserID($_POST['email'])['memberID'];
-      $password = getPassword($id);
+      $id = getUserID($_POST['email']);
+      echo $id[0]['memberID'];
+      $password = getPassword($id[0]['memberID']);
+      echo $password[0]['password'];
+
       //just to test 
-      if($password === $_POST['password']){
-        echo 'welcome $id';
+      if($password[0]['password'] == $_POST['password']){
+        header("Location: main.php&message=Login+successful!");
+        exit;
+
       }
       else{
-        echo 'password and email do not match';
+        header("Location: index.php?page=/login.php&error=Invalid+Credentials!+Please+try+again+with+correct+Username+and/or+Password.");
       }
 
     }

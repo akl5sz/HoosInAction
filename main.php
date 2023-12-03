@@ -128,77 +128,29 @@ $list_of_opportunities = getAllOpportunities();
 
         <div class="album py-5 bg-body-tertiary">
             <!-- DO NOT DELETE THIS -->
-            <!-- <div class="container">
+            <div class="container">
+            <!-- <?php foreach ($list_of_opportunities as $opportunity) : ?> -->
                 <div class="row p-3">
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                            </svg>
-                            <div class="card-body">
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                    </div>
-                                    <small class="text-body-secondary">9 mins</small>
-                                </div>
+                        <div class="col">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-primary-emphasis text-left">@<?php echo $opportunity['organizationID']; ?></strong>
+                                <h3 class="mb-0"><?php echo $opportunity['Name']; ?></h3>
+                                <div class="mb-1 text-body-secondary"><?php echo $opportunity['Date']; ?> • <?php echo $opportunity['Start Time']; ?> to <?php echo $opportunity['End Time']; ?></div>
+                                <p class="card-text mb-auto"><?php echo $opportunity['Description']; ?></p>
+                                <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+                                Continue reading
+                                <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                                </a>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="row p-3">
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                            </svg>
-                            <div class="card-body">
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                    </div>
-                                    <small class="text-body-secondary">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <table class="table">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col">Organization ID</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Start Time</th>
-                        <th scope="col">End Time</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Number Of Spots</th>
-                        <th scope="col">Sign Up Deadline</th>
-                        <th scope="col">Description</th>
-                    </tr>
-                </thead>
-                <?php foreach ($list_of_opportunities as $opportunity) : ?>
-                    <tr>
-                        <td><?php echo $opportunity['organizationID']; ?></td>
-                        <td><?php echo $opportunity['Date']; ?></td>
-                        <td><?php echo $opportunity['Start Time']; ?></td>
-                        <td><?php echo $opportunity['End Time']; ?></td>
-                        <td><?php echo $opportunity['Location']; ?></td>
-                        <td><?php echo $opportunity['Name']; ?></td>
-                        <td><?php echo $opportunity['Number_Of_Spots']; ?></td>
-                        <td><?php echo $opportunity['Sign_Up_Deadline']; ?></td>
-                        <td><?php echo $opportunity['Description']; ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
+                <!-- <?php endforeach; ?> -->
+            </div>
         </div>
     </main>
 

@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,20 +39,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
     $(document).ready( function() {
-        $("#org").click( function (){ 
+        $("a#org").click( function (){
+            var student = document.getElementById('stu');
+            $(student).removeClass("active");
+            $(student).addClass("inactive");
+            
+            
+            $(this).addClass('active');
+            $(this).removeClass('inactive');
+            
+            
             var orgform = document.getElementById('organizationform');
             orgform.hidden= false;
 
             var stuform = document.getElementById('studentform');
             stuform.hidden= true;
-      
-
-            $(this).addClass("orange");
-            $(this).removeClass("gray");
-
-            var student = document.getElementById('stu');
-            $(student).addClass("gray");
-            $(student).removeClass("orange");
+            
         });
 
         $("a#stu").click( function (){ 
@@ -61,13 +64,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             var stuform = document.getElementById('studentform');
             stuform.hidden= false;
       
+            $(this).addClass("active");
+            $(this).removeClass('inactive');
+            
 
-            $(this).addClass("orange");
-            $(this).removeClass("gray");
-
-            var org = document.getElementById('org');
-            $(org).addClass("gray");
-            $(org).removeClass("orange");
+            var org = document.getElementById('organization');
+            $(org).removeClass("active");
+            $(org).addClass("inactive");
+        
+        
+            
       
          });
 
@@ -79,11 +85,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $(student).removeClass("orange");
         });
 
+        $("a#org").on("mouseout", function() {
+            $(this).removeClass("orange");
+            $(this).removeClass("gray");
+            var student = document.getElementById("stu");
+            $(student).removeClass("gray");
+            $(student).removeClass("orange");
+        });
+
         $("a#stu").on("mouseover", function() {
             $(this).addClass("orange");
             $(this).removeClass("gray");
             var student = document.getElementById("org");
             $(student).addClass("gray");
+            (student).removeClass("orange");
+        });
+
+        $("a#stu").on("mouseout", function() {
+            $(this).removeClass("orange");
+            $(this).removeClass("gray");
+            var student = document.getElementById("org");
+            $(student).removeClass("gray");
             $(student).removeClass("orange");
         });
 
@@ -115,13 +137,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         h2{
             margin-top: -20px;
             margin-left: 45px;
-            color: rgb(230, 149, 0);
         }
 
         .col-6{
-            padding-bottom: 20px;
-        }
-        .form-group3{
             padding-bottom: 20px;
         }
 
@@ -141,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         p{
           color: white;
         }
-        a{
+        a.login-link{
           color: rgb(230, 149, 0) ;
         }
         
@@ -152,9 +170,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         #stu:hover {
             text-decoration: none;           
         }
+        .active{
+                    color: rgb(230, 149, 0)  !important;
+                }
+        .inactive{
+            color: gray !important;
+        }
+        
+        
+       
+        /* .active{
+            color: rgb(230, 149, 0)  !important;
+        }
+        .inactive{
+            color: gray  !important;
+        } */
 
         .gray{
-            color: gray;
+            color: gray !important;
         }
 
         .orange{
@@ -168,51 +201,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .form-group04{
             margin-top: 20px;
         }
+        #phoneinfo{
+            color: white  !important;
+        }
+        a.stuclass a.orgclass{
+            color: gray !important;
+        }
+        
 
     </style>
 </head>
 <body class = "register">
     <div class= "container">
         <h1>register.</h1> 
-        <h2 id="student"><a class = "stuclass orange" id="stu">as a student</a></h2>
-        <h2 id="organization"><a class = "orgclass gray" id="org">as an organization</a></h2>
+        <h2 id="student"><a class = "stuclass active" id="stu">as a student</a></h2>
+        <h2 id="organization"><a class = "orgclass inactive" id="org">as an organization</a></h2>
         <p>Already have an account?<a class="login-link" href="login.php">Login</a></p>
         <form name="registerform" id = "studentform" action="register.php" method="post">
-            <div class="row">
-                <div class="col-6">
-                    <div class = "form-group1">
-                        <label for="label-fname"> First Name</label>
-                        <input type="text" class="form-control" id="input-fname" name="fname" placeholder="Enter first name">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class = "form-group2">
-                        <label for="label-lname"> Last Name</label>
-                        <input type="text" class="form-control" id="input-lname" name="lname" placeholder="Enter last name">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class = "form-group3">
-                        <label for="label-id"> Enter Student ID</label>
-                        <input type="text" class="form-control" id="input-id" name="memberID" placeholder="Enter student id">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class = "form-group4">
-                        <label for="label-phone"> Enter Phone Number</label>
-                        <input type="tel" class="form-control" id="input-phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Enter phone number">
-                        <small id="phoneinfo" class="form-text text-muted">You'll be able to enter more phone numbers later.</small>
-                    </div>
-                </div>
-                <div class = "form-group5">
-                        <label for="label-email"> Email Address</label>
-                        <input type="email" class="form-control" id="input-email" name="email" placeholder="Enter email address">
-                </div>
-                    <div class = "form-group6">
-                        <label for="label-password"> Enter password</label>
-                        <input type="password" class="form-control" id="input-password" name="password" placeholder="Enter password">
-                    </div>
+        <div class="row">
+        <div class="col-6">
+            <div class = "form-group1">
+                <label for="label-fname"> First Name</label>
+                <input type="text" class="form-control" id="input-fname" name="fname" placeholder="Enter first name">
             </div>
+        </div>
+        <div class="col-6">
+            <div class = "form-group2">
+                <label for="label-lname"> Last Name</label>
+                <input type="text" class="form-control" id="input-lname" name="lname" placeholder="Enter last name">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class = "form-group3">
+                <label for="label-id"> Enter Student ID</label>
+                <input type="text" class="form-control" id="input-id" name="memberID" placeholder="Enter student id">
+                </div>
+        </div>
+        <div class="col-6">
+            <div class = "form-group4">
+                <label for="label-phone"> Enter Phone Number</label>
+                <input type="tel" class="form-control" id="input-phone" name="phone" placeholder="Enter phone number">
+                <small id="phoneinfo" class="form-text text-muted">You'll be able to enter more phone numbers later.</small>
+            </div>
+        </div>
+        <div class = "form-group" id = "adjust">
+            <label for="label-email"> Email Address</label>
+            <input type="email" class="form-control" id="input-email" name="email" placeholder="Enter email address">
+        </div>
+        <div class = "form-group">
+            <label for="label-password"> Enter password</label>
+            <input type="password" class="form-control" id="input-password" name="password" placeholder="Enter password">
+            </div>
+        </div>
             <input type="submit" id="stubutton" value="Add user" name="addBtn" class="btn btn-primary"/>
         </form>
 
@@ -232,7 +272,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class = "form-group03">
                         <label for="label-text"> Description</label>
-                        <input type="text" class="form-control" id="input-description" name="description" placeholder="Enter organization description">
+                        <textarea class="form-control" id="input-description" name="description" placeholder="Enter organization description" rows="3"></textarea>
                 </div>
                 <div class = "form-group04">
                         <label for="label-email"> Email Address</label>
@@ -242,8 +282,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="label-password"> Enter password</label>
                         <input type="password" class="form-control" id="input-password" name="password" placeholder="Enter password">
                     </div>
-            </div>
-            <input id = "buttonform" type="submit" value="Add user" name="addBtn2" class="btn btn-primary" style=" margin-top: 20px;"/>
+                </div>
+
+                <input id = "buttonform" type="submit" value="Add user" name="addBtn2" class="btn btn-primary" style=" margin-top: 20px;"/>
+            
         </form>
 
     </div>

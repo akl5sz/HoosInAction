@@ -1,0 +1,10 @@
+# Use the PHP 8.1 runtime
+runtime: php81
+
+# Defaults to "serve index.php" 
+entrypoint: serve index.php
+
+# If your main page is index.php, comment the above entrypoint setting 
+
+# runtime: php74
+# entrypoint: serve connect-db.php

@@ -184,50 +184,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     <div class="container">
     <div class="album py-5 bg-body-tertiary">
-    <table class="table">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">Organization ID</th>
-                <th scope="col">Date</th>
-                <th scope="col">Start Time</th>
-                <th scope="col">End Time</th>
-                <th scope="col">Location</th>
-                <th scope="col">Name</th>
-                <th scope="col">Number Of Spots</th>
-                <th scope="col">Sign Up Deadline</th>
-                <th scope="col">Description</th>
-                <th scope="col">Edit</th>
-            </tr>
-        </thead>
-        <?php foreach ($list_of_opportunities as $opportunity) : ?>
-            <tr>
-                <td><?php echo $opportunity['organizationID']; ?></td>
-                <td><?php echo $opportunity['Date']; ?></td>
-                <td><?php echo $opportunity['Start Time']; ?></td>
-                <td><?php echo $opportunity['End Time']; ?></td>
-                <td><?php echo $opportunity['Location']; ?></td>
-                <td><?php echo $opportunity['Name']; ?></td>
-                <td><?php echo $opportunity['Number_Of_Spots']; ?></td>
-                <td><?php echo $opportunity['Sign_Up_Deadline']; ?></td>
-                <td><?php echo $opportunity['Description']; ?></td>
-                <td>
-                <form action="add.php" method="post">
-                    <input type="submit" name="updateBtn" value="Update" class="btn btn-secondary" />
-                    <input type="hidden" name="org_to_update" value="<?php echo $opportunity['organizationID']; ?>" />
-                    <input type="hidden" name="date_to_update" value="<?php echo $opportunity['Date']; ?>" />
-                    <input type="hidden" name="start_time_to_update" value="<?php echo $opportunity['Start Time']; ?>" />
-                    <input type="hidden" name="end_time_to_update" value="<?php echo $opportunity['End Time']; ?>" />
-                    <input type="hidden" name="location_to_update" value="<?php echo $opportunity['Location']; ?>" />
-                    <input type="hidden" name="name_to_update" value="<?php echo $opportunity['Name']; ?>" />
-                    <input type="hidden" name="spots_to_update" value="<?php echo $opportunity['Number_Of_Spots']; ?>" />
-                    <input type="hidden" name="deadline_to_update" value="<?php echo $opportunity['Sign_Up_Deadline']; ?>" />
-                    <input type="hidden" name="description_to_update" value="<?php echo $opportunity['Description']; ?>" />
-                </form>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+            <!-- DO NOT DELETE THIS -->
+            <div class="container">
+            <!-- <?php foreach ($list_of_opportunities as $opportunity) : ?> -->
+                <div class="row p-3">
+                        <div class="col">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-primary-emphasis text-left">@<?php echo $opportunity['organizationID']; ?></strong>
+                                <h3 class="mb-0"><?php echo $opportunity['Name']; ?></h3>
+                                <div class="mb-1 text-body-secondary"><?php echo $opportunity['Date']; ?> • <?php echo $opportunity['Start Time']; ?> to <?php echo $opportunity['End Time']; ?></div>
+                                <p class="card-text mb-auto"><?php echo $opportunity['Description']; ?></p>
+                                <small class="text-body-secondary">at <?php echo $opportunity['Location']; ?></small>   
+                                <div class="d-flex justify-content-end">
+                                    <form action="add.php" method="post">
+                                    <input type="submit" name="updateBtn" value="Update" class="btn btn-secondary" />
+                                    <input type="hidden" name="org_to_update" value="<?php echo $opportunity['organizationID']; ?>" />
+                                    <input type="hidden" name="date_to_update" value="<?php echo $opportunity['Date']; ?>" />
+                                    <input type="hidden" name="start_time_to_update" value="<?php echo $opportunity['Start Time']; ?>" />
+                                    <input type="hidden" name="end_time_to_update" value="<?php echo $opportunity['End Time']; ?>" />
+                                    <input type="hidden" name="location_to_update" value="<?php echo $opportunity['Location']; ?>" />
+                                    <input type="hidden" name="name_to_update" value="<?php echo $opportunity['Name']; ?>" />
+                                    <input type="hidden" name="spots_to_update" value="<?php echo $opportunity['Number_Of_Spots']; ?>" />
+                                    <input type="hidden" name="deadline_to_update" value="<?php echo $opportunity['Sign_Up_Deadline']; ?>" />
+                                    <input type="hidden" name="description_to_update" value="<?php echo $opportunity['Description']; ?>" />
+                                    </form>
+                                </div> 
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <?php endforeach; ?> -->
+            </div>
+        </div>
     </div>
+
+
+
+
+
     </div>
     </main>
 

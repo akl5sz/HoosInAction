@@ -7,9 +7,18 @@ require("connect-db.php");
 require("feedback-db.php");
 
 $organizationID = $_GET['organizationID'];
- $list_of_feedback = getFeedbackPerOrg($organizationID);
+$list_of_feedback = getFeedbackPerOrg($organizationID);
 //  echo $organizationID;
 //  var_dump($list_of_feedback);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    if (!empty($_POST['addBtn']))
+    {
+        addFeedback($_POST['name'],$_POST['orgoID'],$_POST['description']);
+        $list_of_opportunities = getFeedbackPerOrg($organizationID);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +61,6 @@ $organizationID = $_GET['organizationID'];
 
             </div>
         </div>
-
     </div>
     <!-- Navbar -->
 
@@ -81,16 +89,58 @@ $organizationID = $_GET['organizationID'];
                                 <div class="col p-4 d-flex flex-column position-static">
                                     <strong class="d-inline-block mb-2 text-primary-emphasis text-left"><?php echo $feedback['studentID']; ?></strong>
                                     <p class="card-text mb-auto"><?php echo $feedback['Comments']; ?></p>
+                                    <!-- <div class="d-flex justify-content-end">
+                                        <form action="feedback.php" method="post">
+                                        <input type="submit" name="updateBtn" value="Update" class="btn btn-secondary" />
+                                        <input type="hidden" name="org_to_update" value="<?php echo $opportunity['organizationID']; ?>" />
+                                        <input type="hidden" name="date_to_update" value="<?php echo $opportunity['Date']; ?>" />
+                                        <input type="hidden" name="start_time_to_update" value="<?php echo $opportunity['Start Time']; ?>" />
+                                        <input type="hidden" name="end_time_to_update" value="<?php echo $opportunity['End Time']; ?>" />
+                                        <input type="hidden" name="location_to_update" value="<?php echo $opportunity['Location']; ?>" />
+                                        <input type="hidden" name="name_to_update" value="<?php echo $opportunity['Name']; ?>" />
+                                        <input type="hidden" name="spots_to_update" value="<?php echo $opportunity['Number_Of_Spots']; ?>" />
+                                        <input type="hidden" name="deadline_to_update" value="<?php echo $opportunity['Sign_Up_Deadline']; ?>" />
+                                        <input type="hidden" name="description_to_update" value="<?php echo $opportunity['Description']; ?>" />
+                                        </form>
+                                    </div>  -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
+                <div class="row p-3">
+                    <div class="col d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-primary">Add Comment</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
     <!-- Feedback Cards -->
-
+    <div class="container">
+        <p></p>
+        <h1> Add a Comment</h1>
+        <form name="feedbackForm" action="feedback.php" method="post">
+            <div class="row mb-3 mx-3">
+                Username:
+                <input type="text" class="form-control" name="name" required value="<?php echo $_POST[$_SESSION['user']]; ?>" readonly/>
+            </div>
+            <div class="row mb-3 mx-3">
+                Organization Id:
+                <input type="text" class="form-control" name="orgoID" required value="<?php echo $_POST[$organizationID]; ?>" readonly/>
+            </div>
+            <div class="row mb-3 mx-3">
+                Description:
+                <input type="text" class="form-control" name="description" required value="<?php echo $_POST['description_to_update']; ?>"/>
+            </div>
+            <div class="row mb-3 mx-3">
+                <input type="submit" value="Add Comment" name="addBtn" class="btn btn-primary" title="Add a comment" />
+            </div>
+            <!-- <div class="row mb-3 mx-3">
+                <input type="submit" value="Update Feedback" name="updateBtnConfirm" class="btn btn-secondary" title="Update event" />
+            </div> -->
+        </form> 
+    </div>
     <!-- Footer -->
     <footer class="text-body-secondary py-5">
         <div class="container">

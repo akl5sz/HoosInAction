@@ -1,25 +1,9 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 require("connect-db.php");
 require("opportunity-db.php");
-$list_of_opportunities = getAllOpportunities();
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-    if (!empty($_POST['signUpBtn'])){
-        signUp($_SESSION['user'],$_POST['org'],$_POST['date'],$_POST['start'],$_POST['locatn']);
-        $list_of_opportunities = getAllOpportunities();
-    }
-    elseif (!empty($_POST['nameSort'])){
-        $list_of_opportunities = getAllOpportunitiesByName();
-    }
-    elseif (!empty($_POST['dateSort'])){
-        $list_of_opportunities = getAllOpportunitiesByDate();
-    }
-}
-// var_dump($list_of_users);
+
+$list_of_organizations = getAllOrgs($_SESSION['user']);
 ?>
 
 <!DOCTYPE html>
@@ -67,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     </div>
     <!-- Navbar -->
 
-    <!-- Picture Header -->
-    <div class="position-relative">
+     <!-- Picture Header -->
+     <div class="position-relative">
         <div class="p-5 text-center bg-image" style="background-image: url('https://fieldmethods.iath.virginia.edu/rotonda/sites/default/files/media/images/rotunda_night_summer_17_ss_header_5-2.jpg'); height: 400px; background-repeat: no-repeat; background-size: cover; background-position: center;">
             <div class="mask" style="background-color: rgba(0, 0, 0, 0.6); position: absolute; top: 0; left: 0; height: 100%; width: 100%;">
             </div>
@@ -81,39 +65,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     </div>
     <!-- Picture Header -->
 
-    <!-- Volunteer Cards -->
     <main>
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
-            <form name="SigningUp" action="main.php" method="post">
-                <input type="submit" value="Sort By Name" name="nameSort" class="btn btn-sm btn-outline-primary" title="Sort By Name" />
-                <input type="submit" value="Sort By Date" name="dateSort" class="btn btn-sm btn-outline-primary" title="Sort By Date" />
-            </form>
-                <?php foreach ($list_of_opportunities as $opportunity) : ?>
+                <h1>My Organizations</h1>
+                <?php foreach ($list_of_organizations as $org) : ?>
                     <div class="row p-3">
                         <div class="col">
                         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                             <div class="col p-4 d-flex flex-column position-static">
-                                <strong class="d-inline-block mb-2 text-primary-emphasis text-left">
-                                    <a href="/feedback.php?organizationID=<?php echo $opportunity['organizationID']; ?>" style="text-decoration: none;">
-                                        @<?php echo $opportunity['organizationID']; ?>
-                                    </a>
-                                </strong>
-                                <h3 class="mb-0"><?php echo $opportunity['Name']; ?></h3>
-                                <div class="mb-1 text-body-secondary"><?php echo $opportunity['Date']; ?> • <?php echo $opportunity['Start Time']; ?> to <?php echo $opportunity['End Time']; ?></div>
-                                <p class="card-text mb-auto"><?php echo $opportunity['Description']; ?></p>
-                                <small class="text-body-secondary">at <?php echo $opportunity['Location']; ?></small>   
-                                <?php if($_SESSION['user_type']=="Student") : ?>
-                                <div class="d-flex justify-content-end">
-                                    <form name="SigningUp" action="main.php" method="post">
-                                        <input type="submit" value="Sign Up" name="signUpBtn" class="btn btn-sm btn-outline-primary" title="Sign Up" />
-                                        <input type="hidden" name="org" value="<?php echo $opportunity['organizationID']; ?>" />
-                                        <input type="hidden" name="date" value="<?php echo $opportunity['Date']; ?>" />
-                                        <input type="hidden" name="start" value="<?php echo $opportunity['Start Time']; ?>" />
-                                        <input type="hidden" name="locatn" value="<?php echo $opportunity['Location']; ?>" />
-                                    </form>
-                                </div> 
-                                <?php endif; ?>
+                                <h3 class="mb-0"><?php echo $org['organizationID']; ?></h3>
                             </div>
                             <div class="col-auto d-none d-lg-block">
                                 <svg class="bd-placeholder-img" width="300" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -126,10 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     </div>
                 </div>
                 <?php endforeach; ?>
-            </div>
-        </div>
     </main>
-    <!-- Volunteer Cards -->
 
     <!-- Footer -->
     <footer class="text-body-secondary py-5">

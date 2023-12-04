@@ -138,4 +138,14 @@
         return $statement; // Return true to indicate successful deletion
         } 
 
+    function getAllOrgs($user){
+        global $db;
+        $query = "SELECT organizationID FROM Member WHERE studentID = :id";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':id', $user);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $statement->closeCursor();
+        return $results;
+    }
 ?>

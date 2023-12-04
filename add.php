@@ -12,20 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if (!empty($_POST['addBtn']))
     {
-        echo "adding";
-        echo $_SESSION['user'];
-        echo $_POST['date'];
-        echo $_POST['start_time'];
-        echo $_POST['end_time'];
-        echo $_POST['location'];
-        echo $_POST['name'];
-        echo $_POST['num_spots'];
-        echo $_POST['deadline'];
-        echo $_POST['description'];
         addOpportunity($_SESSION['user'],$_POST['date'],$_POST['start_time'],$_POST['end_time'],$_POST['location'],$_POST['name'],$_POST['num_spots'],$_POST['deadline'], $_POST['description']);
-        echo "added";
         $list_of_opportunities = getAllOpportunities();
-        echo "completed";
     }
     else if (!empty($_POST['updateBtnConfirm']))
     {

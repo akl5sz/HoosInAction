@@ -127,16 +127,29 @@
 
     function deleteOpp($id, $name, $date, $time){
         global $db;
-        $query = "DELETE FROM Opportunities WHERE organizationID = :id AND Name = :nme AND `Date` = :dte AND `Start Time` = :tme";
+        $query = "DELETE FROM Opportunities WHERE organizationID=:id AND Date=:dte AND `Start Time`=:tme";
         $statement = $db->prepare($query); 
         $statement->bindValue(':id', $id);
-        $statement->bindValue(':nme', $name);
         $statement->bindValue(':dte', $date);
         $statement->bindValue(':tme', $time);
         $statement->execute();
         $statement->closeCursor();
-        return $statement; // Return true to indicate successful deletion
-        } 
+        return $statement; 
+    } 
+
+    function addCategory($id, $date, $start, $loc, $cat) {
+        global $db;
+        $query = "INSERT INTO `Opportunity_categories` VALUES (:id, :dte, :strt, :loc, :cat);";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':id', $id);
+        $statement->bindValue(':dte', $date);
+        $statement->bindValue(':strt', $start);
+        $statement->bindValue(':loc', $loc);
+        $statement->bindValue(':cat', $cat);
+        $statement->execute();
+        $statement->closeCursor();
+        return true;
+    }
 
     function getAllOrgs($user){
         global $db;

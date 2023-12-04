@@ -13,11 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if (!empty($_POST['addBtn']))
     {
         addOpportunity($_SESSION['user'],$_POST['date'],$_POST['start_time'],$_POST['end_time'],$_POST['location'],$_POST['name'],$_POST['num_spots'],$_POST['deadline'], $_POST['description']);
+        addCategory($_SESSION['user'], $_POST['date'], $_POST['start_time'], $_POST['location'], $_POST['category']);
         $list_of_opportunities = getAllOpportunities();
     }
     else if (!empty($_POST['updateBtnConfirm']))
     {
         updateOpportunity($_SESSION['user'],$_POST['date'],$_POST['start_time'],$_POST['end_time'],$_POST['location'],$_POST['name'],$_POST['num_spots'],$_POST['deadline'], $_POST['description']);
+        
         $list_of_opportunities = getAllOpportunities();
     }
 }
@@ -186,6 +188,17 @@ else :?>
             <div class="row mb-3 mx-3">
                 Description:
                 <input type="text" class="form-control" name="description" required value="<?php echo $_POST['description_to_update']; ?>"/>
+            </div>
+            <div class="row mb-3 mx-3">
+                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Categories</label>
+                <select class="custom-select my-1 mr-sm-2"  name="category">
+                    <option selected>Choose...</option>
+                    <option value="STEM">STEM</option>
+                    <option value="Translation & Interpretation">Translation & Interpretation</option>
+                    <option value="Leadership">Leadership</option>
+                    <option value="Environment">Environment</option>
+                    <option value="Recreation & Sports">Recreation & Sports</option>
+                </select>
             </div>
             <div class="row mb-3 mx-3">
                 <input type="submit" value="Add Opportunity" name="addBtn" class="btn btn-primary" title="Add an opportunity" />

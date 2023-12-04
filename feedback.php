@@ -15,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if (!empty($_POST['addBtn']))
     {
-        addFeedback($_POST['name'],$_POST['orgoID'],$_POST['description']);
-        $list_of_opportunities = getFeedbackPerOrg($organizationID);
+        addFeedback($_SESSION['user'], $organizationID, $_POST['description']);
+        $list_of_feedback = getFeedbackPerOrg($organizationID);
     }
 }
 ?>
@@ -118,29 +118,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     </main>
     <!-- Feedback Cards -->
     <div class="container">
-        <p></p>
-        <h1> Add a Comment</h1>
-        <form name="feedbackForm" action="feedback.php" method="post">
-            <div class="row mb-3 mx-3">
-                Username:
-                <input type="text" class="form-control" name="name" required value="<?php echo $_SESSION['user'] ?>" readonly/>
-            </div>
-            <div class="row mb-3 mx-3">
-                Organization Id:
-                <input type="text" class="form-control" name="orgoID" required value="<?php echo $organizationID ?>" readonly/>
-            </div>
-            <div class="row mb-3 mx-3">
-                Description:
-                <input type="text" class="form-control" name="description" required value="<?php echo $_POST['description_to_update']; ?>"/>
-            </div>
-            <div class="row mb-3 mx-3">
-                <input type="submit" value="Add Comment" name="addBtn" class="btn btn-primary" title="Add a comment" />
-            </div>
-            <!-- <div class="row mb-3 mx-3">
-                <input type="submit" value="Update Feedback" name="updateBtnConfirm" class="btn btn-secondary" title="Update event" />
-            </div> -->
-        </form> 
-    </div>
+    <p></p>
+    <h1> Add a Comment</h1>
+    <form name="feedbackForm" action="feedback.php?organizationID=<?php echo $organizationID; ?>" method="post">
+        <div class="row mb-3 mx-3">
+            Description:
+            <input type="text" class="form-control" name="description" required value="<?php echo isset($_POST['description_to_update']) ? $_POST['description_to_update'] : ''; ?>" />
+        </div>
+        <div class="row mb-3 mx-3">
+            <input type="submit" value="Add Comment" name="addBtn" class="btn btn-primary" title="Add a comment" />
+        </div>
+    </form>
+</div>
     <!-- Footer -->
     <footer class="text-body-secondary py-5">
         <div class="container">

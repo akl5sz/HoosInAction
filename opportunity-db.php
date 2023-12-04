@@ -127,15 +127,14 @@
 
     function deleteOpp($id, $date, $time, $loc){
         global $db;
-        $query = "DELETE FROM Opportunities WHERE organizationID = :id AND Date = :dt AND Time = :ti AND Location = :loc";
+        $query = "DELETE FROM Opportunities WHERE organizationID = :id AND `Date` = :dt AND `Start Time` = :ti";
         $statement = $db->prepare($query); 
         $statement->bindValue(':id', $id);
         $statement->bindValue(':dt', $date);
         $statement->bindValue(':ti', $time);
-        $statement->bindValue(':loc', $loc);
         $statement->execute();
         $statement->closeCursor();
-        return $statement;
+        return true;
     }
     
     function addCategory($id, $date, $start, $loc, $cat) {

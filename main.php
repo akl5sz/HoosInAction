@@ -12,6 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         signUp($_SESSION['user'],$_POST['org'],$_POST['date'],$_POST['start'],$_POST['locatn']);
         $list_of_opportunities = getAllOpportunities();
     }
+    elseif (!empty($_POST['nameSort'])){
+        $list_of_opportunities = getAllOpportunitiesByName();
+    }
+    elseif (!empty($_POST['dateSort'])){
+        $list_of_opportunities = getAllOpportunitiesByDate();
+    }
 }
 // var_dump($list_of_users);
 ?>
@@ -41,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     <li><a href="#" class="nav-link px-2 text-light">Home</a></li>
                     <?php if ($_SESSION['user_type'] == "Student") : ?>
                         <li><a href="/myopportunity.php" class="nav-link px-2 text-white">My Opportunities</a></li>
-                    <?php else : ?>
+                    <?php elseif ($_SESSION['user_type'] == "Organization") : ?>
                         <li><a href="#" class="nav-link px-2 text-white">Organization's Opportunities</a></li>
                         <li><a href="/add.php" class="nav-link px-2 text-white">Add/Modify Opportunities</a></li>
                     <?php endif; ?>
@@ -78,6 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <main>
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
+            <form name="SigningUp" action="main.php" method="post">
+                <input type="submit" value="Sort By Name" name="nameSort" class="btn btn-sm btn-outline-primary" title="Sort By Name" />
+                <input type="submit" value="Sort By Date" name="dateSort" class="btn btn-sm btn-outline-primary" title="Sort By Date" />
+            </form>
                 <?php foreach ($list_of_opportunities as $opportunity) : ?>
                     <div class="row p-3">
                         <div class="col">
@@ -114,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                         </div>
                     </div>
                 </div>
-                <!-- <?php endforeach; ?> -->
+                <?php endforeach; ?>
             </div>
         </div>
     </main>

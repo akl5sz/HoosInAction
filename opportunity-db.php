@@ -123,18 +123,19 @@
         $results = $statement->fetchAll();
         $statement->closeCursor();
         return $results;
-    }
+    }   
 
-    function deleteOpp($id, $date, $time) {
+    function deleteOpp($id, $date, $time, $loc){
         global $db;
-        $query = "DELETE FROM Opportunities WHERE organizationID=:id AND Date=:dte AND `Start Time`=:tme";
+        $query = "DELETE FROM Opportunities WHERE organizationID = :id AND Date = :dt AND Time = :ti AND Location = :loc";
         $statement = $db->prepare($query); 
         $statement->bindValue(':id', $id);
-        $statement->bindValue(':dte', $date);
-        $statement->bindValue(':tme', $time);
+        $statement->bindValue(':dt', $date);
+        $statement->bindValue(':ti', $time);
+        $statement->bindValue(':loc', $loc);
         $statement->execute();
         $statement->closeCursor();
-        return true;
+        return $statement;
     }
     
     function addCategory($id, $date, $start, $loc, $cat) {

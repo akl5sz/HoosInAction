@@ -1,10 +1,11 @@
 <!-- <?php echo "HoosInAction" ?> -->
 <?php
+session_start();
 require("connect-db.php");
 require("opportunity-db.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (!empty($_POST['delebtn'])) {
-        deleteOpp($_POST['organizationID'], $_POST['Date'], $_POST['Start']);
+    if (!empty($_POST['deletebtn'])) {
+        deleteOpp($_POST['organizationID'], $_POST['Date'], $_POST['Start'], $_POST['Location']);
     }
   }
 if($_SESSION['memberID']){
@@ -116,10 +117,10 @@ if($_SESSION['memberID']){
                         <td><?php echo '
                         <form name="deleteform" action="organizationopportunity.php" method="post">
                         <input type="text" name="organizationID" value="' . $opportunity['organizationID'].'" hidden>
-                        <input type="text" name="Name" value="' . $opportunity['Name'].'" hidden>
+                        <input type="text" name="Location" value="' . $opportunity['Location'].'" hidden>
                         <input type="date" name="Date" value="' . $opportunity['Date'].'" hidden>
                         <input type="time" name="Start" value="' . $opportunity['Start Time'].'" hidden>
-                        <input type="submit" value="Delete" name="delebtn" class="btn btn-primary"/>
+                        <input type="submit" value="Delete" name="deletebtn" class="btn btn-primary"/>
                         </form>';
                         ?>
                         </td>

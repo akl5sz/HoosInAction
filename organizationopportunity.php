@@ -93,7 +93,6 @@ if($_SESSION['memberID']){
                         <th scope="col">Location</th>
                         <th scope="col">Number Of Spots</th>
                         <th scope="col">Sign Up Deadline</th>
-                        <th scope="col"> </th>
                     </tr>
                 </thead>
                 <?php foreach ($list_of_opportunities as $opportunity) : ?>
@@ -106,15 +105,6 @@ if($_SESSION['memberID']){
                         <td><?php echo $opportunity['Location']; ?></td>
                         <td><?php echo $opportunity['Number_Of_Spots']; ?></td>
                         <td><?php echo $opportunity['Sign_Up_Deadline']; ?></td>
-                        <td><?php echo '
-                        <form name="deleteform" action="organizationopportunity.php" method="post">
-                        <input type="text" name="organizationID" value="' . $opportunity['organizationID'].'" hidden>
-                        <input type="text" name="Location" value="' . $opportunity['Location'].'" hidden>
-                        <input type="date" name="Date" value="' . $opportunity['Date'].'" hidden>
-                        <input type="time" name="Start" value="' . $opportunity['Start Time'].'" hidden>
-                        <input type="submit" value="Delete" name="deletebtn" class="btn btn-primary"/>
-                        </form>';
-                        ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

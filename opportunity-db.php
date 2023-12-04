@@ -137,4 +137,19 @@
         return $statement; 
     } 
 
+    function addCategory($id, $date, $start, $loc, $cat){
+        global $db;
+        $query = "INSERT INTO `Opportunity_categories` VALUES (:id, :dte, :strt, :loc, :cat);";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':id', $id);
+        $statement->bindValue(':dte', $date);
+        $statement->bindValue(':strt', $start);
+        $statement->bindValue(':loc', $loc);
+        $statement->bindValue(':cat', $cat);
+        $statement->execute();
+        $statement->closeCursor();
+        alert("worked");
+        return true;
+    }
+
 ?>

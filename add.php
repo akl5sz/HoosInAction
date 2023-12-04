@@ -126,11 +126,11 @@ else :?>
                 </a> -->
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><img src="https://logos-world.net/wp-content/uploads/2021/11/UVA-Symbol.png" height="40px"></li>
-                    <li><a href="#" class="nav-link px-2 text-light">Home</a></li>
+                    <li><a href="/#" class="nav-link px-2 text-light">Home</a></li>
                     <?php if($_SESSION['user_type']=="Student") : ?>
-                    <li><a href="#" class="nav-link px-2 text-white">My Opportunities</a></li>
+                    <li><a href="/#" class="nav-link px-2 text-white">My Opportunities</a></li>
                     <?php elseif($_SESSION['user_type']=="Organization") : ?>
-                    <li><a href="#" class="nav-link px-2 text-white">Organization's Opportunities</a></li>
+                    <li><a href="/#" class="nav-link px-2 text-white">Organization's Opportunities</a></li>
                     <li><a href="/add.php" class="nav-link px-2 text-white">Add/Modify Opportunities</a></li>
                     <?php endif; ?>
                 </ul>

@@ -68,7 +68,7 @@
 
     function addOpportunity($organizationID, $date, $starttime, $endtime, $location, $name, $numSpots,$deadline, $description){
         global $db;
-        $query = "INSERT INTO (`organizationID`, `Date`,`Start Time`,`End Time`,`Location`,`Name`, `Number_Of_Spots`,`Sign_Up_Deadline`,`Description`) `Opportunities` VALUES (:organizationID, :eventdate, :starttime, :endtime, :locatn, :eventname, :spots, :deadline, :descr);";
+        $query = "INSERT INTO 'Opportunities'(`organizationID`, `Date`,`Start Time`,`End Time`,`Location`,`Name`, `Number_Of_Spots`,`Sign_Up_Deadline`,`Description`) VALUES (:organizationID, :eventdate, :starttime, :endtime, :locatn, :eventname, :spots, :deadline, :descr);";
         $statement = $db->prepare($query); 
         $statement->bindValue(':organizationID', $organizationID);
         $statement->bindValue(':eventdate', $date);

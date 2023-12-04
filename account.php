@@ -3,8 +3,30 @@
 require("connect-db.php");
 require("opportunity-db.php");
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    if (!empty($_POST['emailBtn']))
+    {
+        addEmail($_SESSION['user'], $_POST['email']);
+    }
+    elseif (!empty($_POST['phoneBtn']))
+    {
+        addPhone($_SESSION['user'], $_POST['phone']);
+    }
+    elseif (!empty($_POST['deleteEmail']))
+    {
+        removeEmail($_SESSION['user'], $_POST['email']);
+    }
+    elseif (!empty($_POST['deletePhone']))
+    {   
+        removePhone($_SESSION['user'], $_POST['phone']);
+    }
+}
 $list_of_organizations = getAllOrgs($_SESSION['user']);
 $emails = getEmails($_SESSION['user']);
+$phones = getPhones($_SESSION['user']);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -69,19 +91,53 @@ $emails = getEmails($_SESSION['user']);
     <main>
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
+            <div class="col-xs-6"> 
                 <h1>My Emails </h1>
                 <table class="table">
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">Emails</th>
+                        <th scope="col"> </th>
                     </tr>
                 </thead>
                 <?php foreach ($emails as $email) : ?>
                     <tr>
                         <td><?php echo $email['email']; ?></td>
+                        <td> 
+                            <form name="DeleteEmail" action="account.php" method="post">
+                                <input type="text" name="email" value="<?php echo $email['email']; ?>" hidden>
+                                <input type="submit" value="Delete" name="deleteEmail" class="btn btn-primary"/>
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </table>
+                </div>
+                <?php if ($_SESSION['user_type'] == "Student") : ?>
+                <div class="col-xs-6">
+                <h1>My Phone Numbers </h1>
+                <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Phone Numbers</th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                <?php foreach ($phones as $phone) : ?>
+                    <tr>
+                        <td><?php echo $phone['phone_number']; ?></td>
+                        <td> 
+                            <form name="DeletePhone" action="account.php" method="post">
+                                <input type="text" name="phone" value="<?php echo $phone['phone_number']; ?>" hidden>
+                                <input type="submit" value="Delete" name="deletePhone" class="btn btn-primary"/>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </table>
+                </div>
+                <?php endif; ?>
+                <?php if ($_SESSION['user_type'] == "Student") : ?>
                 <h1>My Organizations</h1>
                 <?php foreach ($list_of_organizations as $org) : ?>
                     <div class="row p-3">
@@ -101,6 +157,22 @@ $emails = getEmails($_SESSION['user']);
                     </div>
                 </div>
                 <?php endforeach; ?>
+                <?php endif; ?>
+                <h1>Add Another Email</h1>
+                <form name="AddEmail" action="account.php" method="post">
+                    <input type="text" class="form-control" name="email" required/>
+                    <input type="submit" value="Add Email" name="emailBtn" class="btn btn-primary" title="Add an email" />
+                </form>
+                <p> </p>
+                <?php if ($_SESSION['user_type'] == "Student") : ?>
+                    <h1>Add Another Phone Number</h1>
+                    <form name="AddPhone" action="account.php" method="post">
+                        <input type="text" class="form-control" name="phone" required/>
+                        <input type="submit" value="Add a Phone Number" name="phoneBtn" class="btn btn-primary" title="Add a phone number" />
+                    </form>
+                <?php endif; ?>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->

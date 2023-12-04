@@ -194,6 +194,17 @@
         return $results;
     }
 
+    function getPhones($user){
+        global $db;
+        $query = "SELECT * FROM `Student_phones` WHERE `studentID` = :id";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':id', $user);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $statement->closeCursor();
+        return $results;
+    }
+
     function updateCategory($id, $date, $start, $loc, $cat) {
         global $db;
         $query = "UPDATE `Opportunity_categories` SET `Date`=:dte, `Start Time`=:strt, `Location`=:loc, `Category`=:cat WHERE `organizationID`=:id AND `Date`=:date AND `Start Time`=:starttime AND `Location`=:location;";
@@ -211,4 +222,43 @@
         return true;
     }
     
+    function addEmail($user, $email){
+        global $db;
+        $query = "INSERT INTO `User_emails` VALUES (:user, :email);";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':user', $user);
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    function addPhone($user, $phone){
+        global $db;
+        $query = "INSERT INTO `Student_phones` VALUES (:id, :phone);";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':id', $user);
+        $statement->bindValue(':phone', $phone);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    function removeEmail($user, $email){
+        global $db;
+        $query = "DELETE FROM `User_emails` WHERE memberID=:user AND email=:email;";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':user', $user);
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    function removePhone($user, $phone){
+        global $db;
+        $query = "DELETE FROM `Student_phones` WHERE studentID=:id AND phone_number=:phone;";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':id', $user);
+        $statement->bindValue(':phone', $phone);
+        $statement->execute();
+        $statement->closeCursor();
+    }
 ?>

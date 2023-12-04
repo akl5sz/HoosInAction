@@ -23,13 +23,22 @@
         return $statement;
     }
     function getAllOpportunities(){
+        /*
         global $db;
         $query = "SELECT * from Opportunities NATURAL JOIN Opportunity_categories";
         $statement = $db->prepare($query);
         $statement->execute();
 
         $results = $statement->fetchAll();
+        $statement->closeCursor();*/
+
+        $query = "CALL getAll()";
+        $statement = $db->prepare($query);
+        $statement->execute();
+
+        $results = $statement->fetchAll();
         $statement->closeCursor();
+
         return $results;
     }
 

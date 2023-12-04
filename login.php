@@ -6,9 +6,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST['loginBtn'])) {
       $id = getUserID($_POST['email']);
       $password = getPassword($id[0]['memberID']);
-      $passwordHash = password_hash($password[0]['password'], PASSWORD_DEFAULT);
+      $incoming_password = htmlspecialchars($password[0]['password']);
+      $passwordHash = password_hash($incoming_password, PASSWORD_DEFAULT);
         //check password with hash
-      if(password_verify($_POST['password'], $passwordHash)){
+        $post_password = htmlspecialchars($_POST['password']);
+      if(password_verify($post_password, $passwordHash)){
+        session_start();
+        $_SESSION['memberID'] = $id[0]['memberID'];
         header("Location: /main.php");
         exit();
       }

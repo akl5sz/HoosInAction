@@ -161,4 +161,15 @@
         $statement->closeCursor();
         return $results;
     }
+
+    function getEmails($user){
+        global $db;
+        $query = "SELECT * FROM `User_emails` WHERE memberID = :id";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':id', $user);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $statement->closeCursor();
+        return $results;
+    }
 ?>

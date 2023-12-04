@@ -4,6 +4,7 @@ require("connect-db.php");
 require("opportunity-db.php");
 
 $list_of_organizations = getAllOrgs($_SESSION['user']);
+$emails = getEmails($_SESSION['user']);
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +69,19 @@ $list_of_organizations = getAllOrgs($_SESSION['user']);
     <main>
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
+                <h1>My Emails </h1>
+                <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Emails</th>
+                    </tr>
+                </thead>
+                <?php foreach ($emails as $email) : ?>
+                    <tr>
+                        <td><?php echo $email['email']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </table>
                 <h1>My Organizations</h1>
                 <?php foreach ($list_of_organizations as $org) : ?>
                     <div class="row p-3">

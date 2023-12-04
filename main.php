@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                         </div>
                     </div>
                 </div>
-                <!-- <?php endforeach; ?> -->
+                <?php endforeach; ?>
             </div>
         </div>
     </main>

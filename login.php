@@ -1,6 +1,4 @@
-
 <?php
-ob_start();
 require("connect-db.php");
 require("opportunity-db.php");
 require("user-db.php");
@@ -8,19 +6,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST['loginBtn'])) {
       $id = getUserID($_POST['email']);
       $password = getPassword($id[0]['memberID']);
-
-      //just to test 
-      if($password[0]['password'] == $_POST['password']){
-        header("Location: main.php");
+      $passwordHash = password_hash($password[0]['password'], PASSWORD_DEFAULT);
+        //check password with hash
+      if(password_verify($_POST['password'], $passwordHash)){
+        header("Location: /main.php");
         exit();
       }
       else{
-        echo "password and email do not match";
+        echo '<script>alert("Password and Email do not match.")</script>'; 
       }
 
     }
   }
-  ob_end_clean();
 ?>
 
 <!DOCTYPE html>

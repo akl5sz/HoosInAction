@@ -1,4 +1,3 @@
-<!-- <?php echo "HoosInAction" ?> -->
 <?php
 require("connect-db.php");
 require("opportunity-db.php");
@@ -17,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     addOrganization($_POST['OrgID'],$_POST['OrgName'], $_POST['description']);
     addUser_emails($_POST['OrgID'],$_POST['email']);
   }
+  header("Location: /main.php");
+  exit();
 }
 
 

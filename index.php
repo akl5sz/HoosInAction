@@ -3,7 +3,7 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
    case '/':                   // URL (without file name) to a default screen
       require 'main.php';
       break; 
-   case '/main.oho':
+   case '/main.php':
       require 'main.php';
       break;
    case '/register.php':     // if you plan to also allow a URL with the file name 

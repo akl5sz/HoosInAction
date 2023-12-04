@@ -1,4 +1,3 @@
-<!-- <?php echo "HoosInAction" ?> -->
 <?php
 require("connect-db.php");
 require("opportunity-db.php");
@@ -8,16 +7,18 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST['loginBtn'])) {
-      $id = getUserID($_POST['email'])['memberID'];
-      $password = getPassword($id);
-      //just to test 
-      if($password === $_POST['password']){
-        echo 'welcome $id';
+      $id = getUserID($_POST['email']);
+      $password = getPassword($id[0]['memberID']);
+      $passwordHash = password_hash($password[0]['password'], PASSWORD_DEFAULT);
+        //check password with hash
+      if(password_verify($_POST['password'], $passwordHash)){
+        header("Location: /main.php");
         $_SESSION['user'] = $id;
         $_SESSION['user_type'] = getUserType($id);
+        exit();
       }
       else{
-        echo 'password and email do not match';
+        echo '<script>alert("Password and Email do not match.")</script>'; 
       }
 
     }
@@ -87,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class = "login">
     <div class= "container">
         <h1>login.</h1> 
-        <p>Do not have an account? <a class="register-link" href="register.php">Login</a></p>
+        <p>Do not have an account? <a class="register-link" href="register.php">register</a></p>
         <form name="loginform" action="login.php" method="post">>
             <div class="row">
                 <div class = "form-group1">
@@ -101,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="password" class="form-control" id="input-password" name="password" placeholder="Enter password">
             </div>
 
-            <input type="submit" value="Add user" name="loginBtn" class="btn btn-primary"/>
+            <input type="submit" value="Login" name="loginBtn" class="btn btn-primary"/>
         </form>
 
 

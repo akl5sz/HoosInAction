@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require("connect-db.php");
 require("opportunity-db.php");
 require("user-db.php");

@@ -1,7 +1,10 @@
 <?php
+session_start();
+
 require("connect-db.php");
 require("opportunity-db.php");
 require("user-db.php");
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST['loginBtn'])) {
       $id = getUserID($_POST['email']);
@@ -14,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         session_start();
         $_SESSION['memberID'] = $id[0]['memberID'];
         header("Location: /main.php");
+        $_SESSION['user'] = $id;
+        $_SESSION['user_type'] = getUserType($id);
+        echo '<script>alert("Successfully logged in!")</script>';
         exit();
       }
       else{

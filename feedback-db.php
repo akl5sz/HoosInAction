@@ -1,7 +1,8 @@
 <?php 
-function addFeedback($name, $orgoID, $description){
+function addFeedback($name, $orgoID, $description)
+{
     global $db;
-    $query = "insert into Feedback values('name', 'orgoID', 'description')";
+    $query = "INSERT INTO Feedback (organizationID, studentID, Comments) VALUES (:orgoID, :name, :description)";
 
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $name);
@@ -9,7 +10,6 @@ function addFeedback($name, $orgoID, $description){
     $statement->bindValue(':description', $description);
 
     $statement->execute();
-
     $statement->closeCursor();
 }
 

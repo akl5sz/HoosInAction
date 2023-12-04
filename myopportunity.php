@@ -88,6 +88,7 @@ if($_SESSION['memberID']){
     <main>
     <div class="album py-5 bg-body-tertiary">
             <!-- DO NOT DELETE THIS -->
+            <div class="container">
             <table class="table">
                 <thead class="table-dark">
                     <tr>
@@ -120,6 +121,7 @@ if($_SESSION['memberID']){
                     </tr>
                 <?php endforeach; ?>
             </table>
+            </div>
         </div>
     </main>
 

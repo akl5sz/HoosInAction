@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if (!empty($_POST['addBtn']))
     {
-        addFeedback($_POST[$_SESSION['user']],$_POST[$organizationID],$_POST['description']);
+        addFeedback($_POST['name'],$_POST['orgoID'],$_POST['description']);
         $list_of_opportunities = getFeedbackPerOrg($organizationID);
     }
 }

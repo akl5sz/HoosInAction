@@ -1,7 +1,7 @@
 <?php 
 function addFeedback($name, $orgoID, $description){
     global $db;
-    $query = "insert into Feedback values(:name, :orgoID, :description)";
+    $query = "insert into Feedback values('name', 'orgoID', 'description')";
 
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $name);

@@ -23,8 +23,8 @@
         return $statement;
     }
     function getAllOpportunities(){
-        /*
-        global $db;
+        
+        global $db;/*
         $query = "SELECT * from Opportunities NATURAL JOIN Opportunity_categories";
         $statement = $db->prepare($query);
         $statement->execute();
@@ -112,15 +112,27 @@
 
     function signUp($studentID, $organizationID, $eventDate, $startTime, $locatn){
         global $db;
-        $query = "INSERT INTO `Signs_up` VALUES (:studentID, :organizationID, :eventDate, :startTime, :locatn);";
-        $statement = $db->prepare($query); 
+        $q = "SELECT * FROM `Signs_up` WHERE studentID=:studentID AND organizationID=:organizationID AND `Date`=:eventDate AND `Time`=:startTime AND `Location`=:locatn;";
+        $statement = $db->prepare($q); 
         $statement->bindValue(':studentID', $studentID);
         $statement->bindValue(':organizationID', $organizationID);
         $statement->bindValue(':eventDate', $eventDate);
         $statement->bindValue(':startTime', $startTime);
         $statement->bindValue(':locatn', $locatn);
         $statement->execute();
+        $results = $statement->fetchAll();
         $statement->closeCursor();
+        if (count($results) == 0) {
+            $query = "INSERT INTO `Signs_up` VALUES (:studentID, :organizationID, :eventDate, :startTime, :locatn);";
+            $statement = $db->prepare($query); 
+            $statement->bindValue(':studentID', $studentID);
+            $statement->bindValue(':organizationID', $organizationID);
+            $statement->bindValue(':eventDate', $eventDate);
+            $statement->bindValue(':startTime', $startTime);
+            $statement->bindValue(':locatn', $locatn);
+            $statement->execute();
+            $statement->closeCursor();
+        }   
     }
 
     function getOrgOpportunity($id){

@@ -125,7 +125,7 @@
         return $results;
     }
 
-    function deleteOpp($id, $name, $date, $time){
+    function deleteOpp($id, $date, $time) {
         global $db;
         $query = "DELETE FROM Opportunities WHERE organizationID=:id AND Date=:dte AND `Start Time`=:tme";
         $statement = $db->prepare($query); 
@@ -134,9 +134,9 @@
         $statement->bindValue(':tme', $time);
         $statement->execute();
         $statement->closeCursor();
-        return $statement; 
-    } 
-
+        return true;
+    }
+    
     function addCategory($id, $date, $start, $loc, $cat) {
         global $db;
         $query = "INSERT INTO `Opportunity_categories` VALUES (:id, :dte, :strt, :loc, :cat);";
@@ -173,7 +173,7 @@
         return $results;
     }
 
-    function updateCategory($id, $date, $start, $loc, $cat){
+    function updateCategory($id, $date, $start, $loc, $cat) {
         global $db;
         $query = "UPDATE `Opportunity_categories` SET `Date`=:dte, `Start Time`=:strt, `Location`=:loc, `Category`=:cat WHERE `organizationID`=:id AND `Date`=:date AND `Start Time`=:starttime AND `Location`=:location;";
         $statement = $db->prepare($query); 
@@ -182,9 +182,12 @@
         $statement->bindValue(':strt', $start);
         $statement->bindValue(':loc', $loc);
         $statement->bindValue(':cat', $cat);
+        $statement->bindValue(':date', $date);
+        $statement->bindValue(':starttime', $start);
+        $statement->bindValue(':location', $loc);
         $statement->execute();
         $statement->closeCursor();
         return true;
     }
-
+    
 ?>

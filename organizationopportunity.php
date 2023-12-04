@@ -4,7 +4,7 @@ require("connect-db.php");
 require("opportunity-db.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST['delebtn'])) {
-        deleteOpp($_POST['organizationID'], $_POST['Name'], $_POST['Date'], $_POST['Start']);
+        deleteOpp($_POST['organizationID'], $_POST['Date'], $_POST['Start']);
     }
   }
 if($_SESSION['memberID']){

@@ -1,3 +1,35 @@
+<?php
+session_start();
+
+require("connect-db.php");
+require("opportunity-db.php");
+require("user-db.php");
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if (!empty($_POST['addBtn'])) {
+    addUser($_POST['memberID'], $_POST['password']);
+    addStudent($_POST['memberID'],$_POST['fname'], $_POST['lname']);
+    addUser_emails($_POST['memberID'],$_POST['email']);
+    addStudent_phone($_POST['memberID'],$_POST['phone']);
+
+    $_SESSION['memberID'] = $id[0]['memberID'];
+    $_SESSION['user'] = $id[0]['memberID'];
+    $_SESSION['user_type'] = "Student";
+  }
+
+  if (!empty($_POST['addBtn2'])) {
+    addUser($_POST['OrgID'], $_POST['password']);
+    addOrganization($_POST['OrgID'],$_POST['OrgName'], $_POST['description']);
+    addUser_emails($_POST['OrgID'],$_POST['email']);
+    $_SESSION['memberID'] = $id[0]['memberID'];
+    $_SESSION['user'] = $id[0]['memberID'];
+    $_SESSION['user_type'] = "Organization";
+  }
+  header("Location: /main.php");
+  exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

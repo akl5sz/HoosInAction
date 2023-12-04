@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             height: 650px;
             margin-top: 150px;
             margin-bottom: 150px;
-            background-color:rgb(0, 10, 10);
+            background-color:#2a3656;;
         }
         h1{
             color:rgb(255, 255, 255);
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class= "container">
         <h1>login.</h1> 
         <p>Do not have an account? <a class="register-link" href="register.php">register</a></p>
-        <form name="loginform" action="login.php" method="post">>
+        <form name="loginform" action="login.php" method="post">
             <div class="row">
                 <div class = "form-group1">
                         <label for="label-email"> Email Address</label>

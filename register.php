@@ -1,31 +1,3 @@
-<?php
-session_start();
-
-require("connect-db.php");
-require("opportunity-db.php");
-require("user-db.php");
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  if (!empty($_POST['addBtn'])) {
-    addUser($_POST['memberID'], $_POST['password']);
-    addStudent($_POST['memberID'],$_POST['fname'], $_POST['lname']);
-    addUser_emails($_POST['memberID'],$_POST['email']);
-    addStudent_phone($_POST['memberID'],$_POST['phone']);
-  }
-
-  if (!empty($_POST['addBtn2'])) {
-    addUser($_POST['OrgID'], $_POST['password']);
-    addOrganization($_POST['OrgID'],$_POST['OrgName'], $_POST['description']);
-    addUser_emails($_POST['OrgID'],$_POST['email']);
-  }
-  header("Location: /main.php");
-  exit();
-}
-
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             height: 650px;
             margin-top: 150px;
             margin-bottom: 150px;
-            background-color:rgb(0, 10, 10);
+            background-color:#2a3656;
         }
         h1{
             color:rgb(255, 255, 255);

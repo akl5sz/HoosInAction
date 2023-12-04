@@ -97,7 +97,7 @@ function getUserType($id){
     $statement->execute();
     $result = $statement->fetchAll();
     while ($statement->fetch()){
-        if (!in_array($id)){
+        if (!in_array($id, $result)){
             $type = "Student"
             return $type;
         }

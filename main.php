@@ -1,6 +1,8 @@
 <!-- <?php echo "HoosInAction" ?> -->
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 require("connect-db.php");
 require("opportunity-db.php");

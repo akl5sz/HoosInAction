@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 require("connect-db.php");
 require("opportunity-db.php");
@@ -16,9 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       if(password_verify($post_password, $passwordHash)){
         session_start();
         $_SESSION['memberID'] = $id[0]['memberID'];
-        header("Location: /main.php");
         $_SESSION['user'] = $id;
         $_SESSION['user_type'] = getUserType($id);
+
+        
+        header("Location: /main.php");
         echo '<script>alert("Successfully logged in!")</script>';
         exit();
       }

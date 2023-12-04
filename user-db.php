@@ -90,18 +90,25 @@ function getPassword($memberID){
 
 function getUserType($id){
     global $db;
-    $type;
+    global $type;
     $query = "SELECT * FROM Organizations WHERE organizationID = :id";
     $statement = $db -> prepare($query);
     $statement->bindValue(':id',$id);
     $statement->execute();
     $result = $statement->fetchAll();
-    while ($statement->fetch()){
-        if (!in_array($id, $result)){
-            $type = "Student";
-            return $type;
-        }
+    if (count($result) > 0) {
+        $type = "Organization";
+        return $type;
+    } else {
+        $type = "Student";
+        return $type;
     }
-    $type = "Organization";
-    return $type;
+    // while ($statement->fetch()){
+    //     if (!in_array($result, $id)){
+    //         $type = "Student";
+    //         return $type;
+    //     }
+    // }
+    // $type = "Organization";
+    // return $type;
 }

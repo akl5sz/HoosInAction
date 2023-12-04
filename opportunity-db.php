@@ -127,7 +127,7 @@
 
     function deleteOpp($id, $name, $date, $time){
         global $db;
-        $query = "DELETE FROM Opportunities WHERE organizationID = :id AND Name = :nme AND Date = :dte AND `Start Time` = :tme";
+        $query = "DELETE FROM Opportunities WHERE organizationID = :id AND Name = :nme AND `Date` = :dte AND `Start Time` = :tme";
         $statement = $db->prepare($query); 
         $statement->bindValue(':id', $id);
         $statement->bindValue(':nme', $name);
@@ -135,6 +135,7 @@
         $statement->bindValue(':tme', $time);
         $statement->execute();
         $statement->closeCursor();
-        return $statement;
-    }
+        return $statement; // Return true to indicate successful deletion
+        } 
+
 ?>

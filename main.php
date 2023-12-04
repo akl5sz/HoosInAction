@@ -3,8 +3,10 @@
 require("connect-db.php");
 require("opportunity-db.php");
 $list_of_opportunities = getAllOpportunities();
+echo $_SESSION['user_type']
 // var_dump($list_of_users);
 ?>
+
 
 
 <!DOCTYPE html>

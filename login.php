@@ -4,6 +4,8 @@ require("connect-db.php");
 require("opportunity-db.php");
 require("user-db.php");
 
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST['loginBtn'])) {
       $id = getUserID($_POST['email'])['memberID'];
@@ -11,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       //just to test 
       if($password === $_POST['password']){
         echo 'welcome $id';
+        $_SESSION['user'] = $id;
+        $_SESSION['user_type'] = getUserType($id);
       }
       else{
         echo 'password and email do not match';

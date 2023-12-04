@@ -87,3 +87,21 @@ function getPassword($memberID){
     $statement->closeCursor();
     return $result;
 }
+
+function getUserType($id){
+    global $db;
+    $type;
+    $query = "SELECT * FROM Organizations WHERE organizationID = :id";
+    $statement = $db -> prepare($query);
+    $statement->bindValue(':id',$id);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    while ($statement->fetch()){
+        if (!in_array($id)){
+            $type = "Student"
+            return $type;
+        }
+    }
+    $type = "Organization";
+    return $type;
+}

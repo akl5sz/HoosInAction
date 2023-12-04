@@ -34,42 +34,34 @@ if($_SESSION['memberID']){
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <div class="p-3" style="background-color: #141e3c;">   
+        <!-- Navbar -->
+        <div class="p-3" style="background-color: #141e3c;">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <!-- <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
-                </a> -->
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><img src="https://logos-world.net/wp-content/uploads/2021/11/UVA-Symbol.png" height="40px"></li>
-                    <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
-                    <?php if($_SESSION['user_type']=="Student") : ?>
-                    <li><a href="/myopportunity.php" class="nav-link px-2 text-light">My Opportunities</a></li>
-                    <?php elseif($_SESSION['user_type']=="Organization") : ?>
-                    <li><a href="#" class="nav-link px-2 text-white">Organization's Opportunities</a></li>
-                    <li><a href="/add.php" class="nav-link px-2 text-white">Add/Modify Opportunities</a></li>
+                    <li><a href="/#" class="nav-link px-2 text-light">Home</a></li>
+                    <?php if ($_SESSION['user_type'] == "Student") : ?>
+                        <li><a href="/myopportunity.php" class="nav-link px-2 text-white">My Opportunities</a></li>
+                    <?php elseif ($_SESSION['user_type'] == "Organization") : ?>
+                        <li><a href="/organizationopportunity.php" class="nav-link px-2 text-white">Organization's Opportunities</a></li>
+                        <li><a href="/add.php" class="nav-link px-2 text-white">Add/Modify Opportunities</a></li>
                     <?php endif; ?>
                 </ul>
-
-                <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-                </form> -->
-                
                 <div class="text-end">
-                    <?php if(!$_SESSION['user_type']) : ?>
-                    <a href="login.php"><button href="login.php" type="button" class="btn btn-outline-light me-2">Login</button> </a>
-                    <!-- <a href="register.php" class="btn btn-warning" role="button">Sign-up</a> -->
+                    <?php if (!$_SESSION['user_type']) : ?>
+                        <a href="/login.php"><button href="login.php" type="button" class="btn btn-outline-light me-2">Login</button> </a>
                     <?php else : ?>
-                    <a href="logout.php"><button href="logout.php" type="button" class="btn btn-outline-light me-2">Logout</button> </a>
+                        <a href="/logout.php"><button href="logout.php" type="button" class="btn btn-outline-light me-2">Logout</button> </a>
+                        <a href="/account.php"><button href="account.php" type="button" class="btn btn-outline-light me-2">Account</button> </a>
                     <?php endif; ?>
                 </div>
-                
+
             </div>
         </div>
- 
-</div>
+
+    </div>
+    <!-- Navbar -->
 
 <!-- Background image -->
 <div class="position-relative">

@@ -29,7 +29,7 @@ $emails = getEmails($_SESSION['user']);
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><img src="https://logos-world.net/wp-content/uploads/2021/11/UVA-Symbol.png" height="40px"></li>
-                    <li><a href="#" class="nav-link px-2 text-light">Home</a></li>
+                    <li><a href="/#" class="nav-link px-2 text-light">Home</a></li>
                     <?php if ($_SESSION['user_type'] == "Student") : ?>
                         <li><a href="/myopportunity.php" class="nav-link px-2 text-white">My Opportunities</a></li>
                     <?php elseif ($_SESSION['user_type'] == "Organization") : ?>
@@ -39,10 +39,10 @@ $emails = getEmails($_SESSION['user']);
                 </ul>
                 <div class="text-end">
                     <?php if (!$_SESSION['user_type']) : ?>
-                        <a href="login.php"><button href="login.php" type="button" class="btn btn-outline-light me-2">Login</button> </a>
+                        <a href="/login.php"><button href="login.php" type="button" class="btn btn-outline-light me-2">Login</button> </a>
                     <?php else : ?>
-                        <a href="logout.php"><button href="logout.php" type="button" class="btn btn-outline-light me-2">Logout</button> </a>
-                        <a href="account.php"><button href="account.php" type="button" class="btn btn-outline-light me-2">Account</button> </a>
+                        <a href="/logout.php"><button href="logout.php" type="button" class="btn btn-outline-light me-2">Logout</button> </a>
+                        <a href="/account.php"><button href="account.php" type="button" class="btn btn-outline-light me-2">Account</button> </a>
                     <?php endif; ?>
                 </div>
 

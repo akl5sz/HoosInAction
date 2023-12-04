@@ -6,6 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 require("connect-db.php");
 require("opportunity-db.php");
 $list_of_opportunities = getAllOpportunities();
+// var_dump($list_of_users);
 ?>
 
 <!DOCTYPE html>
@@ -31,11 +32,11 @@ $list_of_opportunities = getAllOpportunities();
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><img src="https://logos-world.net/wp-content/uploads/2021/11/UVA-Symbol.png" height="40px"></li>
                     <li><a href="#" class="nav-link px-2 text-light">Home</a></li>
-                    <?php if ($_SESSION['user_type'] == "Student") : ?>
-                        <li><a href="#" class="nav-link px-2 text-white">My Opportunities</a></li>
+                    <?php if($_SESSION['user_type']=="Student") : ?>
+                    <li><a href="#" class="nav-link px-2 text-white">My Opportunities</a></li>
                     <?php else : ?>
-                        <li><a href="#" class="nav-link px-2 text-white">Organization's Opportunities</a></li>
-                        <li><a href="/add.php" class="nav-link px-2 text-white">Add/Modify Opportunities</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Organization's Opportunities</a></li>
+                    <li><a href="/add.php" class="nav-link px-2 text-white">Add/Modify Opportunities</a></li>
                     <?php endif; ?>
                 </ul>
                 <div class="text-end">
@@ -73,34 +74,30 @@ $list_of_opportunities = getAllOpportunities();
                 <?php foreach ($list_of_opportunities as $opportunity) : ?>
                     <div class="row p-3">
                         <div class="col">
-                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                <div class="col p-4 d-flex flex-column position-static">
-                                    <strong class="d-inline-block mb-2 text-primary-emphasis text-left">
-                                        <a href="/feedback.php?organizationID=<?php echo $opportunity['organizationID']; ?>" style="text-decoration: none;">
-                                            @<?php echo $opportunity['organizationID']; ?>
-                                        </a>
-                                    </strong>
-                                    <h3 class="mb-0"><?php echo $opportunity['Name']; ?></h3>
-                                    <div class="mb-1 text-body-secondary"><?php echo $opportunity['Date']; ?> • <?php echo $opportunity['Start Time']; ?> to <?php echo $opportunity['End Time']; ?></div>
-                                    <p class="card-text mb-auto"><?php echo $opportunity['Description']; ?></p>
-                                    <small class="text-body-secondary">at <?php echo $opportunity['Location']; ?></small>
-                                    <?php if ($_SESSION['user_type'] == "Student") : ?>
-                                        <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn btn-sm btn-outline-primary">Sign Up</button>
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
-                                <div class="col-auto d-none d-lg-block">
-                                    <svg class="bd-placeholder-img" width="300" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#55595c"></rect>
-                                        <text x="50%" y="50%" fill="#eceeef" text-anchor="middle" dominant-baseline="middle">Thumbnail</text>
-                                    </svg>
-                                </div>
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-primary-emphasis text-left">@<?php echo $opportunity['organizationID']; ?></strong>
+                                <h3 class="mb-0"><?php echo $opportunity['Name']; ?></h3>
+                                <div class="mb-1 text-body-secondary"><?php echo $opportunity['Date']; ?> • <?php echo $opportunity['Start Time']; ?> to <?php echo $opportunity['End Time']; ?></div>
+                                <p class="card-text mb-auto"><?php echo $opportunity['Description']; ?></p>
+                                <small class="text-body-secondary">at <?php echo $opportunity['Location']; ?></small>   
+                                <?php if($_SESSION['user_type']=="Student") : ?>
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-sm btn-outline-primary">Sign Up</button>
+                                </div> 
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <svg class="bd-placeholder-img" width="300" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                    <title>Placeholder</title>
+                                    <rect width="100%" height="100%" fill="#55595c"></rect>
+                                    <text x="50%" y="50%" fill="#eceeef" text-anchor="middle" dominant-baseline="middle">Thumbnail</text>
+                                </svg>
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                </div>
+                <!-- <?php endforeach; ?> -->
             </div>
         </div>
     </main>

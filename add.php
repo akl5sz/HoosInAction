@@ -12,20 +12,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if (!empty($_POST['addBtn']))
     {
-        addOpportunity($_POST['org'],$_POST['date'],$_POST['start_time'],$_POST['end_time'],$_POST['location'],$_POST['name'],$_POST['num_spots'],$_POST['deadline'], $_POST['description']);
+        echo "adding";
+        echo $_SESSION['user'];
+        echo $_POST['date'];
+        echo $_POST['start_time'];
+        echo $_POST['end_time'];
+        echo $_POST['location'];
+        echo $_POST['name'];
+        echo $_POST['num_spots'];
+        echo $_POST['deadline'];
+        echo $_POST['description'];
+        addOpportunity($_SESSION['user'],$_POST['date'],$_POST['start_time'],$_POST['end_time'],$_POST['location'],$_POST['name'],$_POST['num_spots'],$_POST['deadline'], $_POST['description']);
+        echo "added";
         $list_of_opportunities = getAllOpportunities();
+        echo "completed";
     }
     else if (!empty($_POST['updateBtnConfirm']))
     {
-        updateOpportunity($_POST['org'],$_POST['date'],$_POST['start_time'],$_POST['end_time'],$_POST['location'],$_POST['name'],$_POST['num_spots'],$_POST['deadline'], $_POST['description']);
+        updateOpportunity($_SESSION['user'],$_POST['date'],$_POST['start_time'],$_POST['end_time'],$_POST['location'],$_POST['name'],$_POST['num_spots'],$_POST['deadline'], $_POST['description']);
         $list_of_opportunities = getAllOpportunities();
     }
 }
 ?>
 
 <?php if($_SESSION['user_type'] != "Organization") :
-    echo '<script>alert("You are not authorized to access this page.")</script>';
     header("Location: /main.php");
+    echo '<script>alert("You are not authorized to access this page.")</script>';
 else :?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,45 +119,54 @@ else :?>
         </ul>
     </div>
 
-    <header class="p-3 text-bg-dark">
+    <body data-new-gr-c-s-check-loaded="14.1136.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1136.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <div class="p-3" style="background-color: #141e3c;">   
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <!-- <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                     <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
                         <use xlink:href="#bootstrap"></use>
                     </svg>
-                </a>
-
+                </a> -->
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+                    <li><img src="https://logos-world.net/wp-content/uploads/2021/11/UVA-Symbol.png" height="40px"></li>
+                    <li><a href="#" class="nav-link px-2 text-light">Home</a></li>
+                    <?php if($_SESSION['user_type']=="Student") : ?>
                     <li><a href="#" class="nav-link px-2 text-white">My Opportunities</a></li>
+                    <?php elseif($_SESSION['user_type']=="Organization") : ?>
+                    <li><a href="#" class="nav-link px-2 text-white">Organization's Opportunities</a></li>
+                    <li><a href="/add.php" class="nav-link px-2 text-white">Add/Modify Opportunities</a></li>
+                    <?php endif; ?>
                 </ul>
 
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                     <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-                </form>
-
+                </form> -->
+                
                 <div class="text-end">
+                    <?php if(!$_SESSION['user_type']) : ?>
                     <a href="login.php"><button href="login.php" type="button" class="btn btn-outline-light me-2">Login</button> </a>
-                    <a href="register.php" class="btn btn-warning" role="button">Sign-up</a>
+                    <!-- <a href="register.php" class="btn btn-warning" role="button">Sign-up</a> -->
+                    <?php else : ?>
+                    <a href="logout.php"><button href="logout.php" type="button" class="btn btn-outline-light me-2">Logout</button> </a>
+                    <?php endif; ?>
                 </div>
+                
             </div>
         </div>
-    </header>
+ 
+    </div>
 
     <main> 
     <div class="container">
         <p></p>
         <h1> Add an Opportunity</h1>
         <form name="Opportunities" action="add.php" method="post">
-            <div class="row mb-3 mx-3">
-                <label for="org"> Organization: </label>
-                <select name="org" required value="<?php echo $_POST['org_to_update']; ?>">
-                <?php foreach ($list_of_orgs as $org) : ?>
-                    <option> <?php echo $org['organizationID']; ?></option>
-                <?php endforeach; ?>
-                </select>
-            </div> 
             <div class="row mb-3 mx-3">
                 Date:
                 <input type="date" class="form-control" name="date" required value="<?php echo $_POST['date_to_update']; ?>"/>
@@ -155,8 +176,8 @@ else :?>
                 <input type="time" class="form-control" name="start_time" required value="<?php echo $_POST['start_time_to_update']; ?>"/>                
             </div>
             <div class="row mb-3 mx-3">
-                   End Time:
-            <input type="time" class="form-control" name="end_time" required value="<?php echo $_POST['end_time_to_update']; ?>"/>
+                End Time:
+                <input type="time" class="form-control" name="end_time" required value="<?php echo $_POST['end_time_to_update']; ?>"/>
             </div>
             <div class="row mb-3 mx-3">
                 Location:

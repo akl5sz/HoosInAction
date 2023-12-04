@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     <?php if ($_SESSION['user_type'] == "Student") : ?>
                         <li><a href="/myopportunity.php" class="nav-link px-2 text-white">My Opportunities</a></li>
                     <?php elseif ($_SESSION['user_type'] == "Organization") : ?>
-                        <li><a href="#" class="nav-link px-2 text-white">Organization's Opportunities</a></li>
+                        <li><a href="/organizationopportunity.php" class="nav-link px-2 text-white">Organization's Opportunities</a></li>
                         <li><a href="/add.php" class="nav-link px-2 text-white">Add/Modify Opportunities</a></li>
                     <?php endif; ?>
                 </ul>

@@ -25,6 +25,9 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
    case '/myopportunity.php':
       require 'myopportunity.php';
       break;
+   case '/organizationopportunity.php':
+      require 'organizationopportunity.php';
+      break;
    default:
       http_response_code(404);
       exit('Not Found');

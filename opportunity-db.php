@@ -81,7 +81,6 @@
         $statement->bindValue(':descr', $description);
         $statement->execute();
         $statement->closeCursor();
-        echo "executed";
         return $statement;
     }
 
@@ -113,5 +112,29 @@
         $statement->bindValue(':locatn', $locatn);
         $statement->execute();
         $statement->closeCursor();
+    }
+
+    function getOrgOpportunity($id){
+        global $db;
+        $query = "SELECT * from Opportunities WHERE organizationID= :id";
+        $statement = $db->prepare($query);
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $statement->closeCursor();
+        return $results;
+    }
+
+    function deleteOpp($id, $name, $date, $time){
+        global $db;
+        $query = "DELETE FROM Opportunities WHERE organizationID = :id AND Name = :nme AND Date = :dte AND Time = :tme";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':id', $id);
+        $statement->bindValue(':nme', $name);
+        $statement->bindValue(':dre', $date);
+        $statement->bindValue(':tme', $time);
+        $statement->execute();
+        $statement->closeCursor();
+        return $statement;
     }
 ?>

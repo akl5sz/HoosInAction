@@ -24,7 +24,7 @@
     }
     function getAllOpportunities(){
         global $db;
-        $query = "SELECT * from Opportunities";
+        $query = "SELECT * from Opportunities NATURAL JOIN Opportunity_categories";
         $statement = $db->prepare($query);
         $statement->execute();
 
@@ -35,7 +35,7 @@
 
     function getAllOpportunitiesByName(){
         global $db;
-        $query = "SELECT * from Opportunities ORDER BY `Name`";
+        $query = "SELECT * from Opportunities NATURAL JOIN Opportunity_categories ORDER BY `Name`";
         $statement = $db->prepare($query);
         $statement->execute();
 
@@ -46,7 +46,7 @@
 
     function getAllOpportunitiesByDate(){
         global $db;
-        $query = "SELECT * from Opportunities ORDER BY `Date`";
+        $query = "SELECT * from Opportunities NATURAL JOIN Opportunity_categories ORDER BY `Date`";
         $statement = $db->prepare($query);
         $statement->execute();
 

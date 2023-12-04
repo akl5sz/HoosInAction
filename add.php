@@ -1,5 +1,7 @@
 <!-- <?php echo "HoosInAction" ?> -->
 <?php
+session_start();
+
 require("connect-db.php");
 require("opportunity-db.php");
 $list_of_opportunities = getAllOpportunities();
@@ -21,7 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 ?>
 
-
+<?php if($_SESSION['user_type'] != "Organization") :
+    echo '<script>alert("You are not authorized to access this page.")</script>';
+    header("Location: /main.php");
+else :?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -249,3 +254,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </html>
+<?php endif; ?>

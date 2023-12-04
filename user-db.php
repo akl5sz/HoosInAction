@@ -88,7 +88,6 @@ function getPassword($memberID){
     return $result;
 }
 
-<<<<<<< HEAD
 function getUserType($id){
     global $db;
     $type;
@@ -106,5 +105,3 @@ function getUserType($id){
     $type = "Organization";
     return $type;
 }
-=======
->>>>>>> main

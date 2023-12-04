@@ -1,4 +1,27 @@
 <?php
+    function getUserSignUp($memberID){
+        global $db;
+        $query = "select * from Signs_up WHERE studentID= :id";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':id', $memberID);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    }
+
+    function deleteSignUp($memberID, $organizationID, $date, $time){
+        global $db;
+        $query = "DELETE FROM Signs_up WHERE studentID = :id AND organizationID = :orgid AND Time = :ti AND Date = :dates";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':id', $memberID);
+        $statement->bindValue(':orgid', $organizationID);
+        $statement->bindValue(':ti', $time);
+        $statement->bindValue(':dates', $date);
+        $statement->execute();
+        $statement->closeCursor();
+        return $statement;
+    }
     function getAllOpportunities(){
         global $db;
         $query = "SELECT * from Opportunities";

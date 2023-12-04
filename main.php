@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                                 <div class="mb-1 text-body-secondary"><?php echo $opportunity['Date']; ?> • <?php echo $opportunity['Start Time']; ?> to <?php echo $opportunity['End Time']; ?></div>
                                 <p class="card-text mb-auto"><?php echo $opportunity['Description']; ?></p>
                                 <small class="text-body-secondary">at <?php echo $opportunity['Location']; ?></small>
-                                <small class="text-body-secondary"> <?php echo $opportunity['Category']; ?></small>    
+                                <small class="text-body-secondary"> <?php echo $opportunity['Opportunity_categories.Category']; ?></small>    
                                 <?php if($_SESSION['user_type']=="Student") : ?>
                                 <div class="d-flex justify-content-end">
                                     <form name="SigningUp" action="main.php" method="post">

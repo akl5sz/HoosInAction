@@ -32,6 +32,29 @@
         $statement->closeCursor();
         return $results;
     }
+
+    function getAllOpportunitiesByName(){
+        global $db;
+        $query = "SELECT * from Opportunities ORDER BY `Name`";
+        $statement = $db->prepare($query);
+        $statement->execute();
+
+        $results = $statement->fetchAll();
+        $statement->closeCursor();
+        return $results;
+    }
+
+    function getAllOpportunitiesByDate(){
+        global $db;
+        $query = "SELECT * from Opportunities ORDER BY `Date`";
+        $statement = $db->prepare($query);
+        $statement->execute();
+
+        $results = $statement->fetchAll();
+        $statement->closeCursor();
+        return $results;
+    }
+
     function getAllOrganizations(){
         global $db;
         $query = "select * from Organizations";

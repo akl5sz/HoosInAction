@@ -151,4 +151,18 @@
         return true;
     }
 
+    function updateCategory($id, $date, $start, $loc, $cat){
+        global $db;
+        $query = "UPDATE `Opportunity_categories` SET `Date`=:dte, `Start Time`=:strt, `Location`=:loc, `Category`=:cat WHERE `organizationID`=:id AND `Date`=:date AND `Start Time`=:starttime AND `Location`=:location;";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':id', $id);
+        $statement->bindValue(':dte', $date);
+        $statement->bindValue(':strt', $start);
+        $statement->bindValue(':loc', $loc);
+        $statement->bindValue(':cat', $cat);
+        $statement->execute();
+        $statement->closeCursor();
+        return true;
+    }
+
 ?>

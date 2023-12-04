@@ -19,7 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     else if (!empty($_POST['updateBtnConfirm']))
     {
         updateOpportunity($_SESSION['user'],$_POST['date'],$_POST['start_time'],$_POST['end_time'],$_POST['location'],$_POST['name'],$_POST['num_spots'],$_POST['deadline'], $_POST['description']);
-        
+        updateCategory($_SESSION['user'], $_POST['date'], $_POST['start_time'], $_POST['location'], $_POST['category']);
+
         $list_of_opportunities = getAllOpportunities();
     }
 }

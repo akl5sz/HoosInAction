@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if (!empty($_POST['addBtn']))
     {
-        addFeedback($_POST['name'],$_POST['orgoID'],$_POST['description']);
+        addFeedback($_POST[$_SESSION['user']],$_POST[$organizationID],$_POST['description']);
         $list_of_opportunities = getFeedbackPerOrg($organizationID);
     }
 }
@@ -108,11 +108,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                         </div>
                     </div>
                 <?php endforeach; ?>
-                <div class="row p-3">
+                <!-- <div class="row p-3">
                     <div class="col d-flex justify-content-center">
                         <button type="button" class="btn btn-outline-primary">Add Comment</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </main>
@@ -123,11 +123,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <form name="feedbackForm" action="feedback.php" method="post">
             <div class="row mb-3 mx-3">
                 Username:
-                <input type="text" class="form-control" name="name" required value="<?php echo $_POST[$_SESSION['user']]; ?>" readonly/>
+                <input type="text" class="form-control" name="name" required value="<?php echo $_SESSION['user'] ?>" readonly/>
             </div>
             <div class="row mb-3 mx-3">
                 Organization Id:
-                <input type="text" class="form-control" name="orgoID" required value="<?php echo $_POST[$organizationID]; ?>" readonly/>
+                <input type="text" class="form-control" name="orgoID" required value="<?php echo $organizationID ?>" readonly/>
             </div>
             <div class="row mb-3 mx-3">
                 Description:

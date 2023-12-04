@@ -10,7 +10,8 @@ $list_of_opportunities = getAllOpportunities();
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if (!empty($_POST['signUpBtn'])){
-        
+        signUp($_SESSION['user'],$_POST['org'],$_POST['date'],$_POST['start'],$_POST['locatn']);
+        $list_of_opportunities = getAllOpportunities();
     }
 }
 // var_dump($list_of_users);
@@ -101,6 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                                 <div class="d-flex justify-content-end">
                                     <form name="SigningUp" action="main.php" method="post">
                                         <input type="submit" value="Sign Up" name="signUpBtn" class="btn btn-sm btn-outline-primary" title="Sign Up" />
+                                        <input type="hidden" name="org" value="<?php echo $opportunity['organizationID']; ?>" />
+                                        <input type="hidden" name="date" value="<?php echo $opportunity['Date']; ?>" />
+                                        <input type="hidden" name="start" value="<?php echo $opportunity['Start Time']; ?>" />
+                                        <input type="hidden" name="locatn" value="<?php echo $opportunity['Location']; ?>" />
                                     </form>
                                 </div> 
                                 <?php endif; ?>

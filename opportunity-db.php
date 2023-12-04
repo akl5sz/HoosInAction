@@ -22,27 +22,20 @@
 
     function addOpportunity($organizationID, $date, $starttime, $endtime, $location, $name, $numSpots,$deadline, $description){
         global $db;
-        $query = "INSERT INTO `Opportunities` VALUES (:organizationID, :Date, :Start, :End, :Location, :Name, :Spots, :Deadline, :Description)";
-        echo "1";
-        echo $query;
+        $query = "INSERT INTO (`organizationID`, `Date`,`Start Time`,`End Time`,`Location`,`Name`, `Number_Of_Spots`,`Sign_Up_Deadline`,`Description`) `Opportunities` VALUES (:organizationID, :eventdate, :starttime, :endtime, :locatn, :eventname, :spots, :deadline, :descr);";
         $statement = $db->prepare($query); 
         $statement->bindValue(':organizationID', $organizationID);
-        $statement->bindValue(':Date', $date);
-        $statement->bindValue(':Start', $starttime);
-        $statement->bindValue(':End', $endtime);
-        $statement->bindValue(':Location', $location);
-        $statement->bindValue(':Name', $name);
-        $statement->bindValue(':Spots', $numSpots);
-        $statement->bindValue(':Deadline', $deadline);
-        $statement->bindValue(':Description', $description);
-        echo "2";
-        echo $query;
-        $test = $statement->dump();
-        echo $test;
+        $statement->bindValue(':eventdate', $date);
+        $statement->bindValue(':starttime', $starttime);
+        $statement->bindValue(':endtime', $endtime);
+        $statement->bindValue(':locatn', $location);
+        $statement->bindValue(':eventname', $name);
+        $statement->bindValue(':spots', $numSpots);
+        $statement->bindValue(':deadline', $deadline);
+        $statement->bindValue(':descr', $description);
         $statement->execute();
-        echo "3";
-        echo $statement;
         $statement->closeCursor();
+        echo "executed";
     }
 
     function updateOpportunity($organizationID, $date, $starttime, $endtime, $location, $name, $numSpots,$deadline, $description){
@@ -62,8 +55,16 @@
         $statement->closeCursor();
     }
 
-    function signUp(){
+    function signUp($studentID, $organizationID, $eventDate, $startTime, $locatn){
         global $db;
-        $query = "INSERT INTO `Signs_up` VALUES ()";
+        $query = "INSERT INTO `Signs_up` VALUES (:studentID, :organizationID, :eventDate, :startTime, :locatn);";
+        $statement = $db->prepare($query); 
+        $statement->bindValue(':studentID', $studentID);
+        $statement->bindValue(':organizationID', $organizationID);
+        $statement->bindValue(':eventDate', $eventDate);
+        $statement->bindValue(':startTime', $startTime);
+        $statement->bindValue(':locatn', $locatn);
+        $statement->execute();
+        $statement->closeCursor();
     }
 ?>

@@ -7,6 +7,12 @@ if (session_status() === PHP_SESSION_NONE) {
 require("connect-db.php");
 require("opportunity-db.php");
 $list_of_opportunities = getAllOpportunities();
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    if (!empty($_POST['signUpBtn'])){
+        
+    }
+}
 // var_dump($list_of_users);
 ?>
 
@@ -38,7 +44,7 @@ $list_of_opportunities = getAllOpportunities();
                     <li><a href="#" class="nav-link px-2 text-light">Home</a></li>
                     <?php if($_SESSION['user_type']=="Student") : ?>
                     <li><a href="#" class="nav-link px-2 text-white">My Opportunities</a></li>
-                    <?php else : ?>
+                    <?php elseif($_SESSION['user_type']=="Organization") : ?>
                     <li><a href="#" class="nav-link px-2 text-white">Organization's Opportunities</a></li>
                     <li><a href="/add.php" class="nav-link px-2 text-white">Add/Modify Opportunities</a></li>
                     <?php endif; ?>
@@ -93,7 +99,9 @@ $list_of_opportunities = getAllOpportunities();
                                 <small class="text-body-secondary">at <?php echo $opportunity['Location']; ?></small>   
                                 <?php if($_SESSION['user_type']=="Student") : ?>
                                 <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn btn-sm btn-outline-primary">Sign Up</button>
+                                    <form name="SigningUp" action="main.php" method="post">
+                                        <input type="submit" value="Sign Up" name="signUpBtn" class="btn btn-sm btn-outline-primary" title="Sign Up" />
+                                    </form>
                                 </div> 
                                 <?php endif; ?>
                             </div>

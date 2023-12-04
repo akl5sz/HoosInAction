@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       if(password_verify($post_password, $passwordHash)){
         session_start();
         $_SESSION['memberID'] = $id[0]['memberID'];
-        $_SESSION['user'] = $id;
-        $_SESSION['user_type'] = getUserType($id);
+        $_SESSION['user'] = $id[0]['memberID'];
+        $_SESSION['user_type'] = getUserType($id[0]['memberID']);
 
         
         header("Location: /main.php");
